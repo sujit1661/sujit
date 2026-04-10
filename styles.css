@@ -1164,3 +1164,21 @@ img, video { pointer-events: none; }
   box-shadow: 0 0 8px #22c55e;
   animation: ping 1.5s ease-in-out infinite;
 }
+
+/* ===== IMAGE PERFORMANCE — fade in on load ===== */
+.gallery-item img,
+.cert-img-wrap img,
+.project-thumb img,
+.service-img-wrap img {
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.gallery-item img.loaded,
+.cert-img-wrap img.loaded,
+.project-thumb img.loaded,
+.service-img-wrap img.loaded {
+  opacity: 1;
+}
+/* keep hover effects working after load */
+.project-card:hover .project-thumb img.loaded { opacity: 1; transform: scale(1.08); }
+.gallery-item:hover img.loaded { transform: scale(1.02); }

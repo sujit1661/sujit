@@ -189,3 +189,13 @@ document.querySelectorAll('img, video').forEach(el => {
 document.querySelectorAll('#gallery, #certifications').forEach(el => {
   el.classList.add('no-select');
 });
+
+// ===== IMAGE FADE-IN ON LOAD =====
+document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+  if (img.complete) {
+    img.classList.add('loaded');
+  } else {
+    img.addEventListener('load', () => img.classList.add('loaded'));
+    img.addEventListener('error', () => img.classList.add('loaded')); // show even if broken
+  }
+});
