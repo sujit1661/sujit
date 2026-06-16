@@ -199,3 +199,71 @@ document.querySelectorAll('img[loading="lazy"]').forEach(img => {
     img.addEventListener('error', () => img.classList.add('loaded')); // show even if broken
   }
 });
+
+// ===== TRUST METRICS COUNTER ANIMATION =====
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target, 10);
+  if (isNaN(target)) return;
+  const duration = 1800;
+  const stepTime = 16;
+  const steps = Math.ceil(duration / stepTime);
+  let current = 0;
+  const increment = target / steps;
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      el.textContent = target;
+      clearInterval(timer);
+    } else {
+      el.textContent = Math.floor(current);
+    }
+  }, stepTime);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const nums = entry.target.querySelectorAll('.trust-metric-num[data-target]');
+      nums.forEach(animateCounter);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+const trustSection = document.querySelector('.trust-metrics-section');
+if (trustSection) counterObserver.observe(trustSection);
+
+// ===== FREELANCE SCROLL PANEL — drag + progress bar =====
+(function () {
+  const track = document.getElementById('fl-scroll-track');
+  const progress = document.getElementById('fl-scroll-progress');
+  if (!track) return;
+
+  // update progress bar on scroll
+  function updateProgress() {
+    const max = track.scrollWidth - track.clientWidth;
+    const pct = max > 0 ? (track.scrollLeft / max) * 100 : 0;
+    if (progress) progress.style.width = pct + '%';
+  }
+  track.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // drag to scroll
+  let isDown = false, startX, scrollLeft;
+  track.addEventListener('mousedown', e => {
+    isDown = true;
+    track.classList.add('dragging');
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+  document.addEventListener('mouseup', () => {
+    isDown = false;
+    track.classList.remove('dragging');
+  });
+  track.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX) * 1.4;
+  });
+})();
