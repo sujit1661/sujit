@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://sujitsadalage.dev/sitemap.xml
+Sitemap: https://sujit1661.github.io/sujit/sitemap.xml
 
 # Block access to raw assets that add no SEO value
 Disallow: /gallary/
