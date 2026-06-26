@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://sujitsadalage.dev/sitemap.xml
+
+# Block access to raw assets that add no SEO value
+Disallow: /gallary/
+Disallow: /certifications/
+Disallow: /videos/

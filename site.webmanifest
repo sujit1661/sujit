@@ -1,0 +1,13 @@
+{
+  "name": "Sujit Sadalage — AI Engineer & Full Stack Developer",
+  "short_name": "Sujit Sadalage",
+  "description": "Portfolio of Sujit Sadalage — AI Engineer and Full Stack Developer from India.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00F5FF",
+  "icons": [
+    { "src": "favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
